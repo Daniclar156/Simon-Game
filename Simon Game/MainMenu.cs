@@ -25,10 +25,13 @@ namespace Simon_Game
         private void startButton_Click(object sender, EventArgs e)//play button
         {
             //switch screens
-            GameScreen GS = new GameScreen();
             Form f = this.FindForm();
-            f.Controls.Add(GS);
-            f.Controls.Add(this);
+            f.Controls.Remove(this);
+
+            GameScreen gs = new GameScreen();
+            
+            f.Controls.Add(gs);
+            
         }
     }
 }

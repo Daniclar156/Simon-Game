@@ -14,13 +14,13 @@ namespace Simon_Game
     {
         //global variables
         public static List<int> pattern = new List<int>();
+
         public Form1()
         {
             InitializeComponent();
             //switch screens
-            MainMenu MM = new MainMenu();
-            this.Controls.Add(MM);
-            this.Controls.Remove(this);
+            MainMenu mm = new MainMenu();
+            this.Controls.Add(mm);
         }
     }
 }
