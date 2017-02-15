@@ -13,11 +13,15 @@ namespace Simon_Game
 {
     public partial class GameScreen : UserControl
     {
+
+        //global variables
+        int guess = 0;
+        int guesses;
+        int roundNumber = 1;
+
         public GameScreen()
         {
             InitializeComponent();
-            //global variables
-            int guess;
         }
 
         private void GameScreen_Load(object sender, EventArgs e)
@@ -33,9 +37,7 @@ namespace Simon_Game
         public void ComputerTurn()
         {
             Random randNum = new Random();
-            Form1.pattern.Add(randNum.Next(1, 5));
-            Form1.pattern.Add(randNum.Next(1, 5));
-            Form1.pattern.Add(randNum.Next(1, 5));
+
             Form1.pattern.Add(randNum.Next(1, 5));
 
             for (int i = 0; i < Form1.pattern.Count(); i++)
@@ -83,9 +85,46 @@ namespace Simon_Game
                     Thread.Sleep(1000);
                     blueButton.BackColor = Color.Blue;
                 }
+
+                
             }
+
+            PlayerTurn();
         }
 
         //for loop to go through the list with if statements being compared to the i value
+        /// <summary>
+        /// starts the players turn
+        /// </summary>
+        public void PlayerTurn()//use guess int to track what the player currently guessed
+        {
+                //FOLLOW EXAMPLE ON ONENOTE
+            
+        }
+
+        //set current guess 
+        private void greenButton_Click(object sender, EventArgs e)
+        {
+            guess = 1;
+            PlayerTurn();
+        }
+
+        private void redButton_Click(object sender, EventArgs e)
+        {
+            guess = 2;
+            PlayerTurn();
+        }
+
+        private void yellowButton_Click(object sender, EventArgs e)
+        {
+            guess = 3;
+            PlayerTurn();
+        }
+
+        private void blueButton_Click(object sender, EventArgs e)
+        {
+            guess = 4;
+            PlayerTurn();
+        }
     }
 }
