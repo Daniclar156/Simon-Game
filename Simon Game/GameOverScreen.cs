@@ -16,5 +16,11 @@ namespace Simon_Game
         {
             InitializeComponent();
         }
+
+        private void GameOverScreen_Load(object sender, EventArgs e)
+        {
+            scoreLabel.Text += " " + Form1.pattern.Count();
+            Form1.pattern.Clear();
+        }
     }
 }

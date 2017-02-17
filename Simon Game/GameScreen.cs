@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 
 namespace Simon_Game
 {
@@ -16,8 +17,11 @@ namespace Simon_Game
 
         //global variables
         int guess = 0;
-        int guesses;
-        int roundNumber = 1;
+        SoundPlayer greenBoop = new SoundPlayer(Properties.Resources.green);//soundplayers
+        SoundPlayer redBoop = new SoundPlayer(Properties.Resources.red);
+        SoundPlayer yellowBoop = new SoundPlayer(Properties.Resources.yellow);
+        SoundPlayer blueBoop = new SoundPlayer(Properties.Resources.blue);
+        SoundPlayer failSound = new SoundPlayer(Properties.Resources.mistake);
 
         public GameScreen()
         {
@@ -47,6 +51,7 @@ namespace Simon_Game
                     greenButton.BackColor = Color.Green;
                     Refresh();
                     Thread.Sleep(500);
+                    greenBoop.Play();
                     greenButton.BackColor = Color.White;
                     Refresh();
                     Thread.Sleep(1000);
@@ -58,6 +63,7 @@ namespace Simon_Game
                     redButton.BackColor = Color.Red;
                     Refresh();
                     Thread.Sleep(500);
+                    redBoop.Play();
                     redButton.BackColor = Color.White;
                     Refresh();
                     Thread.Sleep(1000);
@@ -69,6 +75,7 @@ namespace Simon_Game
                     yellowButton.BackColor = Color.Yellow;
                     Refresh();
                     Thread.Sleep(500);
+                    yellowBoop.Play();
                     yellowButton.BackColor = Color.White;
                     Refresh();
                     Thread.Sleep(1000);
@@ -80,51 +87,122 @@ namespace Simon_Game
                     blueButton.BackColor = Color.Blue;
                     Refresh();
                     Thread.Sleep(500);
+                    blueBoop.Play();
                     blueButton.BackColor = Color.White;
                     Refresh();
                     Thread.Sleep(1000);
                     blueButton.BackColor = Color.Blue;
                 }
-
-                
             }
 
-            PlayerTurn();
+            guess = 0;
         }
 
-        //for loop to go through the list with if statements being compared to the i value
-        /// <summary>
-        /// starts the players turn
-        /// </summary>
-        public void PlayerTurn()//use guess int to track what the player currently guessed
-        {
-                //FOLLOW EXAMPLE ON ONENOTE
-            
-        }
-
-        //set current guess 
+        //player turn 
         private void greenButton_Click(object sender, EventArgs e)
         {
-            guess = 1;
-            PlayerTurn();
+            greenBoop.Play();
+            if (Form1.pattern[guess] == 1)
+            {
+                greenButton.BackColor = Color.White;
+                Refresh();
+                Thread.Sleep(500);
+                greenButton.BackColor = Color.Green;
+                Refresh();
+                guess++;
+                if (Form1.pattern.Count == guess)
+                {
+                    ComputerTurn();
+                }
+            }
+            else
+            {
+                failSound.Play();
+                GameOverScreen gos = new GameOverScreen();
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+                f.Controls.Add(gos);
+            }
         }
 
         private void redButton_Click(object sender, EventArgs e)
         {
-            guess = 2;
-            PlayerTurn();
+            redBoop.Play();
+            if (Form1.pattern[guess] == 2)
+            {
+                redButton.BackColor = Color.White;
+                Refresh();
+                Thread.Sleep(500);
+                redButton.BackColor = Color.Red;
+                Refresh();
+                guess++;
+                if (Form1.pattern.Count == guess)
+                {
+                    ComputerTurn();
+                }
+
+            }
+            else
+            {
+                failSound.Play();
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+                GameOverScreen gos = new GameOverScreen();
+                f.Controls.Add(gos);
+            }
         }
 
         private void yellowButton_Click(object sender, EventArgs e)
         {
-            guess = 3;
-            PlayerTurn();
+            yellowBoop.Play();
+            if (Form1.pattern[guess] == 3)
+            {
+                yellowButton.BackColor = Color.White;
+                Refresh();
+                Thread.Sleep(500);
+                yellowButton.BackColor = Color.Yellow;
+                Refresh();
+                guess++;
+                if (Form1.pattern.Count == guess)
+                {
+                    ComputerTurn();
+                }
+            }
+            else
+            {
+                failSound.Play();
+                GameOverScreen gos = new GameOverScreen();
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+                f.Controls.Add(gos);
+            }
         }
 
         private void blueButton_Click(object sender, EventArgs e)
         {
-            guess = 4;
-            PlayerTurn();
+            blueBoop.Play();
+            if (Form1.pattern[guess] == 4)
+            {
+                blueButton.BackColor = Color.White;
+                Refresh();
+                Thread.Sleep(500);
+                blueButton.BackColor = Color.Blue;
+                Refresh();
+                guess++;
+                if (Form1.pattern.Count == guess)
+                {
+                    ComputerTurn();
+                }
+            }
+            else
+            {
+                failSound.Play();
+                GameOverScreen gos = new GameOverScreen();
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+                f.Controls.Add(gos);
+            }
         }
+
     }
 }
